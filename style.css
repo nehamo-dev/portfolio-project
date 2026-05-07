@@ -223,6 +223,60 @@ h2 {
   top: -1px;
 }
 
+/* ── Post cards (Writing) ── */
+.post-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin: 2.5rem 0;
+}
+
+.post-card {
+  background: var(--bg);
+  padding: 1.6rem 1.4rem;
+  text-decoration: none;
+  color: var(--ink);
+  border-left: 3px solid transparent;
+  transition: background 0.15s, border-color 0.2s;
+}
+
+.post-card:hover {
+  background: var(--pink-bg);
+  border-left-color: var(--pink);
+}
+
+.post-date {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pink);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.post-card h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+
+.post-card p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.posts-loading {
+  font-size: 0.85rem;
+  color: var(--muted);
+  padding: 1.5rem 0;
+}
+
 /* ── Contact ── */
 .contact-line {
   font-size: 1.4rem;

@@ -30,9 +30,38 @@
         <p>It's called <em>First Principles</em> — part product strategy, part leadership journal, part conversation with anyone who loves the art of building things well.</p>
         <p>Not a playbook. Not a blueprint. A place to think out loud.</p>
       </div>
+      <div id="post-grid" class="post-grid">
+        <p class="posts-loading">Loading posts…</p>
+      </div>
+
       <a href="https://nehamo.substack.com/" target="_blank" rel="noopener" class="ext-link">
-        Read on Substack ↗
+        Read all on Substack ↗
       </a>
+
+      <script>
+        const RSS = 'https://nehamo.substack.com/feed';
+        const API = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS)}&count=3`;
+        const grid = document.getElementById('post-grid');
+
+        fetch(API)
+          .then(r => r.json())
+          .then(data => {
+            if (data.status !== 'ok') throw new Error();
+            grid.innerHTML = data.items.map(item => {
+              const date = new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+              const snippet = item.description.replace(/<[^>]+>/g, '').slice(0, 120).trim() + '…';
+              return `
+                <a href="${item.link}" target="_blank" rel="noopener" class="post-card">
+                  <span class="post-date">${date}</span>
+                  <h3>${item.title}</h3>
+                  <p>${snippet}</p>
+                </a>`;
+            }).join('');
+          })
+          .catch(() => {
+            grid.innerHTML = '<p class="posts-loading">Could not load posts — <a href="https://nehamo.substack.com/" target="_blank">read on Substack</a>.</p>';
+          });
+      </script>
     </div>
   </main>
 
