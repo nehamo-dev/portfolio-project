@@ -30,29 +30,86 @@
         <p>It's called <em>First Principles</em> — part product strategy, part leadership journal, part conversation with anyone who loves the art of building things well.</p>
         <p>Not a playbook. Not a blueprint. A place to think out loud.</p>
       </div>
-      <div id="post-grid" class="post-grid">
+      <div id="post-grid" class="posts-grid">
         <p class="posts-loading">Loading posts…</p>
       </div>
 
-      <a href="https://nehamo.substack.com/" target="_blank" rel="noopener" class="ext-link">
-        Read all on Substack ↗
-      </a>
+      <style>
+        .posts-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 14px;
+          margin: 2.5rem 0;
+        }
+        .post-tile {
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          padding: 20px;
+          text-decoration: none;
+          color: inherit;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          transition: border-color 0.15s, transform 0.15s;
+        }
+        .post-tile:hover { border-color: var(--border-med, #ccc); transform: translateY(-1px); }
+        .post-tile-date { font-size: 0.78rem; color: var(--muted); }
+        .post-tile-title { font-size: 0.95rem; font-weight: 500; line-height: 1.45; flex: 1; color: var(--ink); }
+        .post-tile-excerpt { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+        .post-tile-read { font-size: 0.82rem; color: var(--pink); font-weight: 500; margin-top: 4px; }
+        .tile-view-all {
+          background: transparent;
+          border: 1px dashed var(--border-med, #ccc);
+          border-radius: 8px;
+          padding: 20px;
+          text-decoration: none;
+          color: var(--muted);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          text-align: center;
+          transition: border-color 0.15s, color 0.15s, transform 0.15s;
+          min-height: 120px;
+        }
+        .tile-view-all:hover { border-color: var(--pink); color: var(--pink); transform: translateY(-1px); }
+        .tile-view-all-icon { font-size: 22px; }
+        .tile-view-all-label { font-size: 0.82rem; font-weight: 500; }
+        @media (max-width: 700px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 420px) { .posts-grid { grid-template-columns: 1fr; } }
+      </style>
 
       <script>
         const grid = document.getElementById('post-grid');
+        const rssUrl = 'https://nehamo.substack.com/feed';
+        const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=3`;
 
-        fetch('/api/posts')
+        fetch(proxyUrl)
           .then(r => r.json())
           .then(data => {
-            grid.innerHTML = data.items.map(item => `
-              <a href="${item.link}" target="_blank" rel="noopener" class="post-card">
-                <span class="post-date">${item.date}</span>
-                <h3>${item.title}</h3>
-                <p>${item.snippet}</p>
-              </a>`).join('');
+            if (data.status !== 'ok' || !data.items?.length) throw new Error('No items');
+            const viewAll = `<a class="tile-view-all" href="https://nehamo.substack.com/" target="_blank" rel="noopener">
+              <span class="tile-view-all-icon">→</span>
+              <span class="tile-view-all-label">Read all posts on Substack</span>
+            </a>`;
+            grid.innerHTML = data.items.slice(0, 3).map(item => {
+              const date = new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+              const excerpt = item.description?.replace(/<[^>]+>/g, '').slice(0, 100).trim() + '…';
+              return `<a class="post-tile" href="${item.link}" target="_blank" rel="noopener">
+                <span class="post-tile-date">${date}</span>
+                <p class="post-tile-title">${item.title}</p>
+                <p class="post-tile-excerpt">${excerpt}</p>
+                <span class="post-tile-read">Read post ↗</span>
+              </a>`;
+            }).join('') + viewAll;
           })
           .catch(() => {
-            grid.innerHTML = '<p class="posts-loading">Could not load posts — <a href="https://nehamo.substack.com/" target="_blank">read on Substack</a>.</p>';
+            grid.innerHTML = `<div style="grid-column:1/-1;padding:16px 0">
+              <p style="font-size:0.85rem;color:var(--muted);margin-bottom:12px">Posts load directly from Substack. Read them there:</p>
+              <a href="https://nehamo.substack.com/" target="_blank" rel="noopener" class="btn-primary" style="display:inline-block;padding:9px 18px;background:var(--pink);color:#fff;border-radius:5px;text-decoration:none;font-size:0.82rem;font-weight:500">Open First Principles on Substack ↗</a>
+            </div>`;
           });
       </script>
     </div>
