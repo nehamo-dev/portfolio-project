@@ -1,57 +1,883 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neha M</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nemo — Builder. Writer. Coach.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-card: #ffffff;
+    --bg-subtle: #f8f8f8;
+    --text: #111111;
+    --text-muted: #555555;
+    --text-faint: #999999;
+    --border: #e8e8e8;
+    --border-med: #cccccc;
+    --accent: #e8442a;
+    --accent-hover: #cc3520;
+    --serif: 'Inter', system-ui, sans-serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --nav-h: 60px;
+    --max: 800px;
+    --text-sm: 13px;
+    --text-base: 15px;
+    --text-heading: 28px;
+    --text-hero: 38px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: var(--text-base);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--nav-h);
+    background: #111111;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+  }
+  .nav-inner {
+    max-width: var(--max);
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: #ffffff; }
+  .nav-links a.active { color: var(--accent); font-weight: 500; }
+
+  /* ── LAYOUT ── */
+  main { width: 100%; }
+
+  section {
+    padding: 80px 32px;
+    scroll-margin-top: calc(var(--nav-h) + 24px);
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-child { border-bottom: none; }
+
+  .section-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+
+  /* alternating section backgrounds */
+  #home    { background: #ffffff; }
+  #building { background: #f5f4f1; }
+  #writing  { background: #ffffff; }
+  #coaching { background: #f5f4f1; }
+  #about    { background: #ffffff; }
+  #contact  { background: #111111; color: #ffffff; }
+
+  #contact .section-label { color: rgba(255,255,255,0.4); }
+  #contact .section-title { color: #ffffff; }
+  #contact p { color: rgba(255,255,255,0.65); }
+  #contact .contact-email { color: #ffffff; border-bottom-color: rgba(255,255,255,0.3); }
+  #contact .contact-email:hover { border-bottom-color: var(--accent); color: var(--accent); }
+
+  /* ── HERO ── */
+  #home { padding-top: 100px; padding-bottom: 88px; }
+  .eyebrow {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 20px;
+  }
+  .hero-headline {
+    font-family: var(--sans);
+    font-size: var(--text-hero);
+    font-weight: 600;
+    line-height: 1.18;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 20px;
+    max-width: 580px;
+  }
+  .hero-headline em {
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+  }
+  .hero-body {
+    font-size: var(--text-base);
+    color: var(--text-muted);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--sans);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    padding: 9px 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.15s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #ffffff;
+  }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border-med);
+  }
+  .btn-secondary:hover { background: var(--bg-subtle); }
+
+  /* ── SECTION HEADERS ── */
+  .section-label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: var(--sans);
+    font-size: var(--text-heading);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .section-desc {
+    font-size: var(--text-base);
+    color: var(--text-muted);
+    max-width: 520px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+
+  /* ── BUILDING / GITHUB PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 700px) {
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 18px 14px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s, transform 0.15s;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .project-card:hover {
+    border-color: var(--border-med);
+    transform: translateY(-1px);
+  }
+  .project-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .project-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .project-icon svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--text-muted);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .project-name {
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--text);
+  }
+  .project-desc {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .project-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2px;
+  }
+  .project-lang {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: var(--text-sm);
+    color: var(--text-faint);
+  }
+  .lang-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .lang-ts { background: #3178c6; }
+  .lang-swift { background: #fa7343; }
+  .lang-html { background: #e34c26; }
+  .lang-py { background: #3572a5; }
+  .lang-js { background: #f1e05a; border: 1px solid #ccc; }
+  .project-stars {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-sm);
+    color: var(--text-faint);
+  }
+  .project-stars svg {
+    width: 12px; height: 12px;
+    stroke: var(--text-faint);
+    fill: none;
+    stroke-width: 1.5;
+  }
+  .projects-footer {
+    margin-top: 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .projects-more-hint {
+    font-size: var(--text-sm);
+    color: var(--text-faint);
+  }
+
+  /* ── WRITING ── */
+  .posts-list { display: flex; flex-direction: column; }
+  .post-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.15s;
+  }
+  .post-item:last-child { border-bottom: none; }
+  .post-item:hover { opacity: 0.65; }
+  .post-title {
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .post-excerpt {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .post-date {
+    font-size: var(--text-sm);
+    color: var(--text-faint);
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+  .writing-footer { margin-top: 24px; }
+  .loading-posts {
+    color: var(--text-faint);
+    font-size: var(--text-sm);
+    padding: 16px 0;
+  }
+
+  /* ── POSTS GRID (3 + view-all tile) ── */
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .post-tile {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .post-tile:hover { border-color: var(--border-med); transform: translateY(-1px); }
+  .post-tile-date {
+    font-size: var(--text-sm);
+    color: var(--text-faint);
+  }
+  .post-tile-title {
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.45;
+    flex: 1;
+  }
+  .post-tile-excerpt {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .post-tile-read {
+    font-size: var(--text-sm);
+    color: var(--accent);
+    font-weight: 500;
+    margin-top: 4px;
+  }
+  /* view-all tile */
+  .tile-view-all {
+    background: transparent;
+    border: 1px dashed var(--border-med);
+    border-radius: 8px;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    transition: border-color 0.15s, color 0.15s, transform 0.15s;
+    min-height: 120px;
+  }
+  .tile-view-all:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+  }
+  .tile-view-all-icon {
+    font-size: 22px;
+    line-height: 1;
+  }
+  .tile-view-all-label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+  }
+  @media (max-width: 700px) {
+    .posts-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 420px) {
+    .posts-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── COACHING ── */
+  .coaching-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 48px;
+    align-items: start;
+  }
+  .coaching-body p {
+    font-size: var(--text-base);
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+  .coaching-body p:last-child { margin-bottom: 0; }
+  .coaching-card {
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .coaching-card-name {
+    font-size: var(--text-base);
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+  .coaching-card-sub {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    line-height: 1.45;
+  }
+  .coaching-detail {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    padding: 9px 0;
+    border-top: 1px solid var(--border);
+  }
+  .coaching-detail svg {
+    width: 13px; height: 13px;
+    stroke: var(--text-faint);
+    fill: none;
+    stroke-width: 1.5;
+    flex-shrink: 0;
+  }
+  .coaching-cta { margin-top: 16px; display: block; width: 100%; text-align: center; }
+  .donate-note {
+    font-size: var(--text-sm);
+    color: var(--text-faint);
+    text-align: center;
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  /* ── ABOUT ── */
+  .about-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .about-text p {
+    font-size: var(--text-base);
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 3px; }
+  .meta-label {
+    font-size: var(--text-sm);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .meta-value {
+    font-size: var(--text-base);
+    color: var(--text);
+  }
+
+  /* ── CONTACT ── */
+  .contact-layout { max-width: 440px; }
+  .contact-layout p {
+    font-size: var(--text-base);
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+  .contact-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-med);
+    padding-bottom: 2px;
+    transition: border-color 0.15s;
+  }
+  .contact-email:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #111111;
+    padding: 24px 32px 40px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .footer-left {
+    font-size: var(--text-sm);
+    color: rgba(255,255,255,0.35);
+  }
+  .footer-right { display: flex; gap: 20px; }
+  .footer-right a {
+    font-size: var(--text-sm);
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .footer-right a:hover { color: #ffffff; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 680px) {
+    nav { padding: 0 20px; }
+    .nav-links { gap: 16px; }
+    section { padding: 64px 20px; }
+    .coaching-layout { grid-template-columns: 1fr; }
+    .about-layout { grid-template-columns: 1fr; }
+    footer { padding: 24px 20px 36px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (max-width: 480px) {
+    .nav-links { display: none; }
+    :root { --text-hero: 30px; --text-heading: 24px; }
+  }
+</style>
 </head>
 <body>
 
-  <nav>
-    <a href="index.html" class="logo">Neha M</a>
-    <ul>
-      <li><a href="building.html">Building</a></li>
-      <li><a href="writing.html">Writing</a></li>
-      <li><a href="coaching.html">Coaching</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">Neha M</a>
+    <ul class="nav-links">
+      <li><a href="#building">Building</a></li>
+      <li><a href="#writing">Writing</a></li>
+      <li><a href="#coaching">Coaching</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
-  </nav>
+  </div>
+</nav>
 
-  <main>
-    <div class="hero">
-      <p class="eyebrow">Neha M</p>
-      <h1>I build, write,<br>and coach.<br><em>This is where all three live.</em></h1>
-      <p class="lead">I write about what I learn, build things that matter to me, and help others think more clearly about their own work.</p>
+<main>
 
-      <div class="featured-grid">
-        <a href="building.html" class="feat-card">
-          <p class="tag">Building</p>
-          <h3>Projects &amp; work in progress</h3>
-          <p>Things I'm making.</p>
-        </a>
-        <a href="writing.html" class="feat-card">
-          <p class="tag">Writing</p>
-          <h3>First Principles</h3>
-          <p>Product, leadership, and clear thinking.</p>
-        </a>
-        <a href="coaching.html" class="feat-card">
-          <p class="tag">Coaching</p>
-          <h3>Work with me</h3>
-          <p>1:1 sessions for founders and leaders.</p>
+  <!-- HERO -->
+  <section id="home">
+    <div class="section-inner">
+      <p class="eyebrow">Product Exec &amp; GM · Builder · Writer · Coach</p>
+      <h1 class="hero-headline">I build, write,<br/>and coach.<br/><em>This is where all three live.</em></h1>
+      <p class="hero-body">I write about what I learn, build things that matter to me, and help others think more clearly about their own work.</p>
+      <div class="hero-ctas">
+        <a href="#building" class="btn btn-primary">See what I'm building</a>
+        <a href="https://nehamo.substack.com/" target="_blank" rel="noopener" class="btn btn-secondary">Read First Principles ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILDING -->
+  <section id="building">
+    <div class="section-inner">
+      <p class="section-label">Building</p>
+      <h2 class="section-title">Projects &amp; work in progress</h2>
+      <p class="section-desc">Things I'm making — side projects, experiments, and tools I wish existed.</p>
+      <div class="projects-grid" id="projects-grid">
+        <div class="loading-posts">Loading projects…</div>
+      </div>
+      <div class="projects-footer" id="projects-footer" style="display:none">
+        <p class="projects-more-hint" id="projects-hint">Showing 3 of 5 repositories</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section id="writing">
+    <div class="section-inner">
+      <p class="section-label">Writing</p>
+      <h2 class="section-title">First Principles</h2>
+      <p class="section-desc">How great products get made, how good decisions get simpler with clear thinking, and how careers grow when you focus on the craft. Not a playbook — a place to think out loud.</p>
+      <div class="posts-grid" id="posts-list">
+        <div class="loading-posts">Loading posts…</div>
+      </div>
+      <div class="writing-footer" style="display:none"></div>
+    </div>
+  </section>
+
+  <!-- COACHING -->
+  <section id="coaching">
+    <div class="section-inner">
+      <p class="section-label">Coaching</p>
+      <h2 class="section-title">Work with me</h2>
+      <div class="coaching-layout">
+        <div class="coaching-body">
+          <p>I work with founders, leaders, and practitioners who want to think more clearly about their work — whether that's figuring out what to build, how to lead through change, or untangling a decision that keeps getting deferred.</p>
+          <p>I'm not a cheerleader. I ask the questions that are easy to avoid, help you see what's actually going on, and tell you the truth. Most people find that useful.</p>
+          <p>Sessions are 1:1, focused, and scheduled when you need them — not on a retainer you'll feel guilty about.</p>
+        </div>
+        <div>
+          <div class="coaching-card">
+            <p class="coaching-card-name">Neha M</p>
+            <p class="coaching-card-sub">Unicorn CPO · Ex PM Director @ Meta, Amazon</p>
+            <div class="coaching-detail">
+              <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              1:1 Video
+            </div>
+            <div class="coaching-detail">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              15 minutes · $50
+            </div>
+            <a href="https://intro.co/nehamonga" target="_blank" rel="noopener" class="btn btn-primary coaching-cta">Book a session ↗</a>
+            <p class="donate-note">100% of proceeds donated to Pratham for Child Education</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <p class="section-label">About</p>
+      <h2 class="section-title">A little background</h2>
+      <div class="about-layout">
+        <div class="about-text">
+          <p>I've spent my career building products and leading teams that try to make work and life a little better.</p>
+          <p>Most lasting progress, I've found, comes back to the basics: clarity of thought, empathy for people, and the discipline to build what actually matters.</p>
+          <p>This site is where those ideas live — through what I build, what I write, and the conversations I have with the people I coach. Part product thinking, part leadership, part figuring it out in public.</p>
+        </div>
+        <div class="about-meta">
+          <div class="meta-item">
+            <span class="meta-label">Location</span>
+            <span class="meta-value">Seattle, WA — Pacific Time</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">LinkedIn</span>
+            <span class="meta-value"><a href="https://www.linkedin.com/in/nehamo/" style="color:var(--text);text-decoration:underline;text-decoration-color:var(--border-med)" target="_blank" rel="noopener">linkedin.com/in/nehamo</a></span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Newsletter</span>
+            <span class="meta-value"><a href="https://nehamo.substack.com/" style="color:var(--text);text-decoration:underline;text-decoration-color:var(--border-med)" target="_blank" rel="noopener">First Principles</a></span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">GitHub</span>
+            <span class="meta-value"><a href="https://github.com/nehamo-dev" style="color:var(--text);text-decoration:underline;text-decoration-color:var(--border-med)" target="_blank" rel="noopener">nehamo-dev</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">Let's talk.</h2>
+      <div class="contact-layout">
+        <p>Have a question, an idea, or just want to connect? My inbox is open.</p>
+        <a href="mailto:neha@outlook.com" class="contact-email">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          neha@outlook.com
         </a>
       </div>
     </div>
-  </main>
+  </section>
 
-  <footer>
-    <span>© 2025 Neha M</span>
-    <span>Built with intention.</span>
-  </footer>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-left">© 2025 Neha M · Built with intention.</span>
+    <div class="footer-right">
+      <a href="https://nehamo.substack.com/" target="_blank" rel="noopener">Substack</a>
+      <a href="https://github.com/nehamo-dev" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://intro.co/nehamonga" target="_blank" rel="noopener">Coaching</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Smooth scroll: offset for sticky nav ──
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const id = link.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    const navH = document.querySelector('nav').offsetHeight;
+    const top = target.getBoundingClientRect().top + window.scrollY - navH - 16;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+});
+
+// ── Active nav link on scroll ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+function setActive() {
+  const navH = document.querySelector('nav').offsetHeight + 32;
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - navH) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', setActive, { passive: true });
+setActive();
+
+// ── Language colors ──
+const langColors = {
+  TypeScript: { cls: 'lang-ts', label: 'TypeScript' },
+  JavaScript: { cls: 'lang-js', label: 'JavaScript' },
+  Swift: { cls: 'lang-swift', label: 'Swift' },
+  HTML: { cls: 'lang-html', label: 'HTML' },
+  Python: { cls: 'lang-py', label: 'Python' },
+};
+
+// ── GitHub repos ──
+async function loadProjects() {
+  const grid = document.getElementById('projects-grid');
+  try {
+    const resp = await fetch('https://api.github.com/users/nehamo-dev/repos?sort=updated&per_page=10');
+    if (!resp.ok) throw new Error('GitHub API error');
+    const repos = await resp.json();
+    const visible = repos.filter(r => !r.fork && !r.archived);
+    if (!visible.length) { grid.innerHTML = '<p class="loading-posts">No public repositories found.</p>'; return; }
+    const shown = visible.slice(0, 3);
+    const total = visible.length;
+    const hint = document.querySelector('.projects-more-hint');
+    if (hint) hint.textContent = `Showing 3 of ${total} repositories`;
+
+    const viewAllTile = `<a class="tile-view-all" href="https://github.com/nehamo-dev" target="_blank" rel="noopener">
+      <span class="tile-view-all-icon">→</span>
+      <span class="tile-view-all-label">View all ${total} repos on GitHub</span>
+    </a>`;
+
+    grid.innerHTML = shown.map(repo => {
+      const lang = langColors[repo.language] || null;
+      const stars = repo.stargazers_count;
+      const desc = repo.description || 'No description yet.';
+
+      return `<a class="project-card" href="${repo.html_url}" target="_blank" rel="noopener">
+        <div class="project-card-header">
+          <div class="project-icon">
+            <svg viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          </div>
+          <span class="project-name">${repo.name}</span>
+        </div>
+        <p class="project-desc">${desc}</p>
+        <div class="project-meta">
+          ${lang ? `<span class="project-lang"><span class="lang-dot ${lang.cls}"></span>${lang.label}</span>` : '<span></span>'}
+          ${stars > 0 ? `<span class="project-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>${stars}</span>` : ''}
+        </div>
+      </a>`;
+    }).join('') + viewAllTile;
+  } catch(err) {
+    const fallbackRepos = [
+      { name: 'wanderluster', desc: 'AI Travel Concierge', lang: 'TypeScript', stars: 1 },
+      { name: 'kinly', desc: 'Family logistics app — React + Supabase + Vite', lang: 'TypeScript', stars: 1 },
+      { name: 'PitchPerfect', desc: 'A small app written in Swift', lang: 'Swift', stars: 0 },
+    ];
+    const viewAllFallback = `<a class="tile-view-all" href="https://github.com/nehamo-dev" target="_blank" rel="noopener">
+      <span class="tile-view-all-icon">→</span>
+      <span class="tile-view-all-label">View all repos on GitHub</span>
+    </a>`;
+    grid.innerHTML = fallbackRepos.map(r => {
+      const lang = langColors[r.lang] || null;
+      return `<a class="project-card" href="https://github.com/nehamo-dev/${r.name}" target="_blank" rel="noopener">
+        <div class="project-card-header">
+          <div class="project-icon">
+            <svg viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          </div>
+          <span class="project-name">${r.name}</span>
+        </div>
+        <p class="project-desc">${r.desc}</p>
+        <div class="project-meta">
+          ${lang ? `<span class="project-lang"><span class="lang-dot ${lang.cls}"></span>${lang.label}</span>` : '<span></span>'}
+          ${r.stars > 0 ? `<span class="project-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>${r.stars}</span>` : ''}
+        </div>
+      </a>`;
+    }).join('') + viewAllFallback;
+  }
+}
+
+// ── Substack RSS posts ──
+async function loadPosts() {
+  const list = document.getElementById('posts-list');
+  const rssUrl = 'https://nehamo.substack.com/feed';
+  const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=3`;
+  try {
+    const resp = await fetch(proxyUrl);
+    if (!resp.ok) throw new Error('RSS error');
+    const data = await resp.json();
+    if (data.status !== 'ok' || !data.items?.length) throw new Error('No items');
+    const viewAllPosts = `<a class="tile-view-all" href="https://nehamo.substack.com/" target="_blank" rel="noopener">
+      <span class="tile-view-all-icon">→</span>
+      <span class="tile-view-all-label">Read all posts on Substack</span>
+    </a>`;
+    list.innerHTML = data.items.slice(0, 3).map(item => {
+      const date = new Date(item.pubDate);
+      const formatted = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      const excerpt = item.description?.replace(/<[^>]+>/g, '').slice(0, 100).trim() + '…';
+      return `<a class="post-tile" href="${item.link}" target="_blank" rel="noopener">
+        <span class="post-tile-date">${formatted}</span>
+        <p class="post-tile-title">${item.title}</p>
+        <p class="post-tile-excerpt">${excerpt}</p>
+        <span class="post-tile-read">Read post ↗</span>
+      </a>`;
+    }).join('') + viewAllPosts;
+  } catch {
+    list.innerHTML = `<div style="padding:16px 0;grid-column:1/-1">
+      <p style="font-size:var(--text-sm);color:var(--text-muted);margin-bottom:12px">Posts load directly from Substack. Read them there:</p>
+      <a href="https://nehamo.substack.com/" target="_blank" rel="noopener" class="btn btn-primary">Open First Principles on Substack ↗</a>
+    </div>`;
+  }
+}
+
+loadProjects();
+loadPosts();
+</script>
 
 </body>
 </html>
