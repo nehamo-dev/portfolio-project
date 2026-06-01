@@ -845,25 +845,20 @@ async function loadProjects() {
 // ── Substack RSS posts ──
 async function loadPosts() {
   const list = document.getElementById('posts-list');
-  const rssUrl = 'https://nehamo.substack.com/feed';
-  const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=3`;
   try {
-    const resp = await fetch(proxyUrl);
-    if (!resp.ok) throw new Error('RSS error');
+    const resp = await fetch('/api/posts');
+    if (!resp.ok) throw new Error('API error');
     const data = await resp.json();
-    if (data.status !== 'ok' || !data.items?.length) throw new Error('No items');
+    if (!data.items?.length) throw new Error('No items');
     const viewAllPosts = `<a class="tile-view-all" href="https://nehamo.substack.com/" target="_blank" rel="noopener">
       <span class="tile-view-all-icon">→</span>
       <span class="tile-view-all-label">Read all posts on Substack</span>
     </a>`;
-    list.innerHTML = data.items.slice(0, 3).map(item => {
-      const date = new Date(item.pubDate);
-      const formatted = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-      const excerpt = item.description?.replace(/<[^>]+>/g, '').slice(0, 100).trim() + '…';
+    list.innerHTML = data.items.map(item => {
       return `<a class="post-tile" href="${item.link}" target="_blank" rel="noopener">
-        <span class="post-tile-date">${formatted}</span>
+        <span class="post-tile-date">${item.date}</span>
         <p class="post-tile-title">${item.title}</p>
-        <p class="post-tile-excerpt">${excerpt}</p>
+        <p class="post-tile-excerpt">${item.snippet}</p>
         <span class="post-tile-read">Read post ↗</span>
       </a>`;
     }).join('') + viewAllPosts;
