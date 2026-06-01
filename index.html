@@ -141,12 +141,12 @@
   }
   .hero-headline {
     font-family: var(--sans);
-    font-size: var(--text-hero);
+    font-size: clamp(36px, 7vw, 64px);
     font-weight: 600;
-    line-height: 1.18;
+    line-height: 1.1;
     letter-spacing: -0.03em;
     color: var(--text);
-    margin-bottom: 6px;
+    margin-bottom: 32px;
   }
   .hero-headline-italic {
     font-size: calc(var(--text-hero) * 0.9);
@@ -658,11 +658,11 @@
   <!-- HERO -->
   <section id="home">
     <div class="section-inner">
+      <p class="eyebrow">Product Exec &amp; GM · Builder · Writer · Coach</p>
+      <h1 class="hero-headline">Building products<br/>that reach billions.</h1>
       <div class="hero-layout">
         <img src="images/headshot.jpg" alt="Neha M" class="hero-photo" />
         <div>
-          <p class="eyebrow">Product Exec &amp; GM · Builder · Writer · Coach</p>
-          <h1 class="hero-headline">Building products<br/>that reach billions.</h1>
           <p class="hero-headline-italic">Thinking out loud.</p>
           <p class="hero-body">I've spent my career at the intersection of technology and human-centered design — building AI products at Amazon, Meta, Lattice, and now at HubSpot. From shaping Alexa's voice on mobile, to growing a commerce platform at Meta, reimagining the future of work at Lattice, and accelerating sales with AI — I've led products that reach millions of users and generate billions in revenue.</p>
           <div class="hero-tags">
