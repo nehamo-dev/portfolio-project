@@ -101,11 +101,12 @@
   }
 
   /* alternating section backgrounds */
-  #home    { background: #ffffff; }
+  #home     { background: #ffffff; }
   #building { background: #f5f4f1; }
   #writing  { background: #ffffff; }
-  #coaching { background: #f5f4f1; }
-  #about    { background: #ffffff; }
+  #speaking { background: #f5f4f1; }
+  #coaching { background: #ffffff; }
+  #about    { background: #f5f4f1; }
   #contact  { background: #111111; color: #ffffff; }
 
   #contact .section-label { color: rgba(255,255,255,0.4); }
@@ -115,14 +116,28 @@
   #contact .contact-email:hover { border-bottom-color: var(--accent); color: var(--accent); }
 
   /* ── HERO ── */
-  #home { padding-top: 100px; padding-bottom: 88px; }
+  #home { padding-top: 80px; padding-bottom: 80px; }
+  .hero-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .hero-photo {
+    width: 220px;
+    height: 220px;
+    border-radius: 12px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
   .eyebrow {
     font-size: var(--text-sm);
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--text-faint);
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
   .hero-headline {
     font-family: var(--sans);
@@ -131,26 +146,62 @@
     line-height: 1.18;
     letter-spacing: -0.03em;
     color: var(--text);
-    margin-bottom: 20px;
-    max-width: 580px;
+    margin-bottom: 6px;
   }
-  .hero-headline em {
-    font-style: normal;
-    color: var(--accent);
+  .hero-headline-italic {
+    font-size: calc(var(--text-hero) * 0.9);
     font-weight: 300;
+    font-style: italic;
     letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 18px;
+    line-height: 1.2;
   }
   .hero-body {
     font-size: var(--text-base);
     color: var(--text-muted);
-    max-width: 480px;
     line-height: 1.7;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
+  }
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .hero-tag {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 12px;
   }
   .hero-ctas {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+  }
+  /* ── SPEAKING ── */
+  #speaking { background: #ffffff; }
+  .speaking-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .speaking-photo {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    display: block;
+    max-height: 480px;
+  }
+  @media (max-width: 680px) {
+    .hero-layout { grid-template-columns: 1fr; }
+    .hero-photo { width: 160px; height: 160px; }
+    .speaking-layout { grid-template-columns: 1fr; }
+    .speaking-photo { order: -1; max-height: 300px; }
   }
   .btn {
     display: inline-flex;
@@ -594,6 +645,7 @@
     <ul class="nav-links">
       <li><a href="#building">Building</a></li>
       <li><a href="#writing">Writing</a></li>
+      <li><a href="#speaking">Speaking</a></li>
       <li><a href="#coaching">Coaching</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -606,12 +658,24 @@
   <!-- HERO -->
   <section id="home">
     <div class="section-inner">
-      <p class="eyebrow">Product Exec &amp; GM · Builder · Writer · Coach</p>
-      <h1 class="hero-headline">I build, write,<br/>and coach.<br/><em>This is where all three live.</em></h1>
-      <p class="hero-body">I write about what I learn, build things that matter to me, and help others think more clearly about their own work.</p>
-      <div class="hero-ctas">
-        <a href="#building" class="btn btn-primary">See what I'm building</a>
-        <a href="https://nehamo.substack.com/" target="_blank" rel="noopener" class="btn btn-secondary">Read First Principles ↗</a>
+      <div class="hero-layout">
+        <img src="images/headshot.jpg" alt="Neha M" class="hero-photo" />
+        <div>
+          <p class="eyebrow">Product Exec &amp; GM · Builder · Writer · Coach</p>
+          <h1 class="hero-headline">Building products<br/>that reach billions.</h1>
+          <p class="hero-headline-italic">Thinking out loud.</p>
+          <p class="hero-body">I've spent my career at the intersection of technology and human-centered design — building AI products at Amazon, Meta, Lattice, and now at HubSpot. From shaping Alexa's voice on mobile, to growing a commerce platform at Meta, reimagining the future of work at Lattice, and accelerating sales with AI — I've led products that reach millions of users and generate billions in revenue.</p>
+          <div class="hero-tags">
+            <span class="hero-tag">Amazon</span>
+            <span class="hero-tag">Meta</span>
+            <span class="hero-tag">Lattice</span>
+            <span class="hero-tag">HubSpot</span>
+          </div>
+          <div class="hero-ctas">
+            <a href="https://www.linkedin.com/in/nehamo/" target="_blank" rel="noopener" class="btn btn-primary">Connect on LinkedIn ↗</a>
+            <a href="#speaking" class="btn btn-secondary">Speaking &amp; Talks</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -641,6 +705,21 @@
         <div class="loading-posts">Loading posts…</div>
       </div>
       <div class="writing-footer" style="display:none"></div>
+    </div>
+  </section>
+
+  <!-- SPEAKING -->
+  <section id="speaking">
+    <div class="section-inner">
+      <p class="section-label">Speaking</p>
+      <div class="speaking-layout">
+        <div>
+          <h2 class="section-title">Conferences, podcasts &amp; keynotes</h2>
+          <p class="section-desc">I speak at conferences, lead keynotes, and join podcasts on product strategy, AI, leadership, and the future of work. If you're putting together a panel, event, or podcast on product leadership or AI — I'd love to talk.</p>
+          <a href="#contact" class="btn btn-primary">Get in touch ↗</a>
+        </div>
+        <img src="images/speaking.png" alt="Neha speaking at Lattice" class="speaking-photo" />
+      </div>
     </div>
   </section>
 
