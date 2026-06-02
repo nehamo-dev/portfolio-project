@@ -123,6 +123,12 @@
     gap: 48px;
     align-items: start;
   }
+  .hero-photo-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
   .hero-photo {
     width: 220px;
     height: 220px;
@@ -130,6 +136,22 @@
     object-fit: cover;
     object-position: center top;
     display: block;
+  }
+  .hero-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    width: 220px;
+  }
+  .hero-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    object-fit: contain;
+    background: #fff;
+    border: 1px solid var(--border);
+    padding: 4px;
   }
   .eyebrow {
     font-size: var(--text-sm);
@@ -162,20 +184,6 @@
     color: var(--text-muted);
     line-height: 1.7;
     margin-bottom: 16px;
-  }
-  .hero-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 24px;
-  }
-  .hero-tag {
-    font-size: var(--text-sm);
-    color: var(--text-muted);
-    background: var(--bg-subtle);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 4px 12px;
   }
   .hero-ctas {
     display: flex;
@@ -661,15 +669,19 @@
       <p class="eyebrow">Product Exec &amp; GM · Builder · Writer · Coach</p>
       <h1 class="hero-headline">Building products<br/>that reach billions.</h1>
       <div class="hero-layout">
-        <img src="images/headshot.jpg" alt="Neha M" class="hero-photo" />
-        <div>
-<p class="hero-body">I've spent my career at the intersection of technology and human-centered design — building AI products at Amazon, Meta, Lattice, and now at HubSpot. From shaping Alexa's voice on mobile, to growing a commerce platform at Meta, reimagining the future of work at Lattice, and accelerating sales with AI — I've led products that reach millions of users and generate billions in revenue.</p>
-          <div class="hero-tags">
-            <span class="hero-tag">Amazon</span>
-            <span class="hero-tag">Meta</span>
-            <span class="hero-tag">Lattice</span>
-            <span class="hero-tag">HubSpot</span>
+        <div class="hero-photo-col">
+          <img src="images/headshot.jpg" alt="Neha M" class="hero-photo" />
+          <div class="hero-logos">
+            <img src="https://logo.clearbit.com/amazon.com" alt="Amazon" class="hero-logo" />
+            <img src="https://logo.clearbit.com/meta.com" alt="Meta" class="hero-logo" />
+            <img src="https://logo.clearbit.com/lattice.com" alt="Lattice" class="hero-logo" />
+            <img src="https://logo.clearbit.com/hubspot.com" alt="HubSpot" class="hero-logo" />
           </div>
+        </div>
+        <div>
+          <p class="hero-body">I've spent my career at the intersection of technology and human-centered design — building AI products at Amazon, Meta, Lattice, and now at HubSpot. From shaping Alexa's voice on mobile, to growing a commerce platform at Meta, reimagining the future of work at Lattice, and accelerating sales with AI — I've led products that reach millions of users and generate billions in revenue.</p>
+          <p class="hero-body">I've spent my career building products and leading teams that try to make work and life a little better. Most lasting progress, I've found, comes back to the basics: clarity of thought, empathy for people, and the discipline to build what actually matters.</p>
+          <p class="hero-body">This site is where those ideas live — through what I build, what I write, and the conversations I have with the people I coach. Part product thinking, part leadership, part figuring it out in public.</p>
           <div class="hero-ctas">
             <a href="https://www.linkedin.com/in/nehamo/" target="_blank" rel="noopener" class="btn btn-primary">Connect on LinkedIn ↗</a>
             <a href="#speaking" class="btn btn-secondary">Speaking &amp; Talks</a>
