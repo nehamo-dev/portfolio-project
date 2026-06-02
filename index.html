@@ -140,18 +140,16 @@
   .hero-logos {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
+    gap: 8px;
     width: 220px;
   }
-  .hero-logo {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    object-fit: contain;
-    background: #fff;
+  .hero-tag {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    background: var(--bg-subtle);
     border: 1px solid var(--border);
-    padding: 4px;
+    border-radius: 20px;
+    padding: 4px 12px;
   }
   .eyebrow {
     font-size: var(--text-sm);
@@ -672,10 +670,10 @@
         <div class="hero-photo-col">
           <img src="images/headshot.jpg" alt="Neha M" class="hero-photo" />
           <div class="hero-logos">
-            <img src="https://logo.clearbit.com/amazon.com" alt="Amazon" class="hero-logo" />
-            <img src="https://logo.clearbit.com/meta.com" alt="Meta" class="hero-logo" />
-            <img src="https://logo.clearbit.com/lattice.com" alt="Lattice" class="hero-logo" />
-            <img src="https://logo.clearbit.com/hubspot.com" alt="HubSpot" class="hero-logo" />
+            <span class="hero-tag">Amazon</span>
+            <span class="hero-tag">Meta</span>
+            <span class="hero-tag">Lattice</span>
+            <span class="hero-tag">HubSpot</span>
           </div>
         </div>
         <div>
